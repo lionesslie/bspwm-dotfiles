@@ -1,254 +1,236 @@
 #!/usr/bin/env python3
+"""
+bspwm_dotfiles installer
+Paketleri yükler ve config dosyalarını ~/.config altına kopyalar.
+Kaynak: https://github.com/lionesslie/bspwm_dotfiles
+"""
 
 import os
-import shutil
 import sys
+import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
-# Renkler
-RED    = "\033[91m"
+# ── Renkler ──────────────────────────────────────────────────────────────────
 GREEN  = "\033[92m"
 YELLOW = "\033[93m"
+RED    = "\033[91m"
 CYAN   = "\033[96m"
 BOLD   = "\033[1m"
 RESET  = "\033[0m"
 
-PACKAGES = [
-    # WM & temel araçlar
+def info(msg):    print(f"{CYAN}[*]{RESET} {msg}")
+def ok(msg):      print(f"{GREEN}[✓]{RESET} {msg}")
+def warn(msg):    print(f"{YELLOW}[!]{RESET} {msg}")
+def error(msg):   print(f"{RED}[✗]{RESET} {msg}")
+def header(msg):  print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n{BOLD}{CYAN}{'─'*50}{RESET}")
+
+# ── Paket listesi ─────────────────────────────────────────────────────────────
+PACMAN_PACKAGES = [
     "bspwm",
-    "dunst",
-    "fish",
-    "kitty",
-    "picom",
-    "polybar",
-    "rofi",
     "sxhkd",
-    # Ekstra araçlar
+    "polybar",
+    "picom",
+    "dunst",
+    "kitty",
+    "rofi",
+    "thunar",
     "feh",
-    "xorg-xinput",
-    "xorg-xrandr",
+    "fish",
+    "udiskie",
     "udisks2",
-    "firefox",
+    "ttf-jetbrains-mono-nerd",
+    "ttf-material-design-icons-extended",
+    "papirus-icon-theme",
+    "playerctl",
+    "brightnessctl",
+    "alsa-utils",
+    "xorg-xrandr",
+    "xorg-xinput",
+    "xdg-user-dirs",
+    "flameshot",
 ]
 
-# Nvidia sürücü seçenekleri
-NVIDIA_DRIVERS = {
-    "1": {
-        "label": "nvidia-dkms (zen-kernel) — Önerilen",
-        "packages": ["nvidia-dkms", "linux-zen-headers", "nvidia-utils", "nvidia-settings"],
-    },
-    "2": {
-        "label": "nvidia (standart kernel)",
-        "packages": ["nvidia", "nvidia-utils", "nvidia-settings"],
-    },
-    "3": {
-        "label": "nvidia-open-dkms (açık kaynak, RTX 2000+)",
-        "packages": ["nvidia-open-dkms", "linux-zen-headers", "nvidia-utils", "nvidia-settings"],
-    },
-    "4": {
-        "label": "nvidia-390xx (eski kartlar, AUR)",
-        "packages": ["nvidia-390xx-dkms", "nvidia-390xx-utils", "nvidia-390xx-settings"],
-    },
-    "5": {
-        "label": "Atla — Nvidia driver kurma",
-        "packages": [],
-    },
+# ── Repo ──────────────────────────────────────────────────────────────────────
+REPO_URL        = "https://github.com/lionesslie/bspwm_dotfiles"
+DOTFILES_SUBDIR = "bspwm-dotfiles"
+
+CONFIG_MAP = {
+    "bspwm":   "bspwm",
+    "sxhkd":   "sxhkd",
+    "polybar":  "polybar",
+    "picom":    "picom",
+    "dunst":    "dunst",
+    "kitty":    "kitty",
+    "rofi":     "rofi",
+    "fish":     "fish",
 }
 
-DOTFILES = [
-    "bspwm",
-    "dunst",
-    "fish",
-    "kitty",
-    "picom",
-    "polybar",
-    "rofi",
-    "sxhkd",
-]
+# ─────────────────────────────────────────────────────────────────────────────
 
-def print_banner():
-    print(f"""
-{CYAN}{BOLD}╔══════════════════════════════════════╗
-║      bspwm Dotfiles Installer        ║
-╚══════════════════════════════════════╝{RESET}
-""")
-
-def log_ok(msg):
-    print(f"  {GREEN}✔{RESET}  {msg}")
-
-def log_skip(msg):
-    print(f"  {YELLOW}⚠{RESET}  {msg}")
-
-def log_err(msg):
-    print(f"  {RED}✘{RESET}  {msg}")
-
-def log_info(msg):
-    print(f"  {CYAN}→{RESET}  {msg}")
-
-def is_installed(pkg: str) -> bool:
-    """Paketin sistemde kurulu olup olmadığını kontrol et."""
-    result = subprocess.run(
-        ["pacman", "-Qi", pkg],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
+def run(cmd, check=True, capture=False):
+    return subprocess.run(
+        cmd, shell=True, check=check,
+        capture_output=capture, text=True
     )
-    return result.returncode == 0
 
-def select_nvidia_driver() -> list:
-    """Kullanıcıya nvidia sürücüsünü seçtir."""
-    print(f"\n{BOLD}[Nvidia Sürücü Seçimi]{RESET}")
-    print()
-
-    for key, val in NVIDIA_DRIVERS.items():
-        print(f"  {CYAN}{key}{RESET}) {val['label']}")
-
-    print()
-    while True:
-        ans = input(f"  {YELLOW}Seçiminiz (1-5) [{BOLD}1{RESET}{YELLOW}]: {RESET}").strip()
-        if ans == "":
-            ans = "1"
-        if ans in NVIDIA_DRIVERS:
-            chosen = NVIDIA_DRIVERS[ans]
-            if chosen["packages"]:
-                log_info(f"Seçildi: {chosen['label']}")
-            else:
-                log_skip("Nvidia kurulumu atlandı.")
-            return chosen["packages"]
-        log_err("Geçersiz seçim, tekrar deneyin.")
-
+def is_arch():
+    return shutil.which("pacman") is not None
 
 def install_packages():
-    """Eksik paketleri sudo pacman ile kur."""
-    print(f"\n{BOLD}[Paket Kurulumu]{RESET}")
+    header("Paketler Yükleniyor")
 
-    # Nvidia seçimi
-    nvidia_pkgs = select_nvidia_driver()
-
-    all_packages = PACKAGES + nvidia_pkgs
-    missing = [p for p in all_packages if not is_installed(p)]
-
-    print()
-    if not missing:
-        log_ok("Tüm paketler zaten kurulu, atlanıyor.")
-        return True
-
-    log_info(f"Kurulacak paketler: {', '.join(missing)}")
-    print()
-
-    ans = input(f"  {YELLOW}Bu paketler kurulsun mu? (e/h) [{BOLD}e{RESET}{YELLOW}]: {RESET}").strip().lower()
-    if ans == "h":
-        log_skip("Paket kurulumu atlandı.")
-        return True
-
-    print()
-    log_info("sudo pacman -S çalıştırılıyor...\n")
-
-    result = subprocess.run(
-        ["sudo", "pacman", "-S", "--needed", "--noconfirm"] + missing
-    )
-
-    if result.returncode == 0:
-        log_ok("Tüm paketler başarıyla kuruldu.")
-        return True
-    else:
-        log_err("Paket kurulumu sırasında hata oluştu.")
-        return False
-
-
-def backup_existing(target: Path):
-    """Mevcut klasörü .bak olarak yedekle."""
-    backup = Path(str(target) + ".bak")
-    if backup.exists():
-        shutil.rmtree(backup)
-    shutil.copytree(target, backup) if target.is_dir() else shutil.copy2(target, backup)
-    log_skip(f"Yedeklendi: {target} → {backup}")
-
-def install(dotfiles_dir: Path, config_dir: Path, backup: bool):
-    success, skipped, failed = 0, 0, 0
-
-    for name in DOTFILES:
-        src = dotfiles_dir / name
-        dst = config_dir / name
-
-        if not src.exists():
-            log_err(f"{name}: kaynak bulunamadı, atlandı.")
-            failed += 1
-            continue
-
-        print(f"\n{BOLD}[{name}]{RESET}")
-
-        # Yedek al
-        if dst.exists() and backup:
-            backup_existing(dst)
-
-        # Kopyala
-        try:
-            if dst.exists():
-                shutil.rmtree(dst) if dst.is_dir() else dst.unlink()
-
-            shutil.copytree(src, dst) if src.is_dir() else shutil.copy2(src, dst)
-            log_ok(f"Kopyalandı → {dst}")
-
-            # bspwmrc ve launch.sh için çalıştırma izni
-            for exe_file in dst.rglob("*"):
-                if exe_file.is_file() and exe_file.suffix in ("", ".sh"):
-                    exe_file.chmod(exe_file.stat().st_mode | 0o111)
-
-            success += 1
-        except Exception as e:
-            log_err(f"{name}: hata — {e}")
-            failed += 1
-
-    return success, skipped, failed
-
-
-def main():
-    print_banner()
-
-    # Dotfiles konumu: script ile aynı dizindeki bspwm-dotfiles/ klasörü
-    # git clone https://github.com/lionesslie/bspwm_dotfiles → bspwm_dotfiles/
-    # ├── install.py
-    # └── bspwm-dotfiles/
-    script_dir   = Path(__file__).parent.resolve()
-    dotfiles_dir = script_dir / "bspwm-dotfiles"
-
-    if not dotfiles_dir.exists():
-        log_err("'bspwm-dotfiles' klasörü bulunamadı.")
-        log_info("Kullanım: git clone https://github.com/lionesslie/bspwm_dotfiles")
-        log_info("          cd bspwm_dotfiles && python3 install.py")
+    if not is_arch():
+        error("Bu installer sadece Arch Linux (pacman) destekler.")
         sys.exit(1)
 
-    config_dir = Path.home() / ".config"
-    config_dir.mkdir(parents=True, exist_ok=True)
+    already, missing = [], []
+    for pkg in PACMAN_PACKAGES:
+        result = run(f"pacman -Qi {pkg}", check=False, capture=True)
+        if result.returncode == 0:
+            already.append(pkg)
+        else:
+            missing.append(pkg)
 
-    # 1) Paket kurulumu
-    install_packages()
+    if already:
+        ok(f"Zaten yüklü ({len(already)} paket): {', '.join(already)}")
 
-    # 2) Dotfile kopyalama
-    print(f"\n{BOLD}[Dotfile Kopyalama]{RESET}")
-    log_info(f"Kaynak : {dotfiles_dir}")
-    log_info(f"Hedef  : {config_dir}")
+    if not missing:
+        ok("Tüm paketler zaten yüklü, atlanıyor.")
+        return
 
-    # Yedekleme sorusu
-    print()
-    ans = input(f"  {YELLOW}Mevcut config'leri yedeklemek ister misiniz? (e/h) [{BOLD}e{RESET}{YELLOW}]: {RESET}").strip().lower()
-    do_backup = ans != "h"
+    info(f"Yüklenecek {len(missing)} paket: {', '.join(missing)}")
+    try:
+        run(f"sudo pacman -S --needed --noconfirm {' '.join(missing)}")
+        ok("Paketler başarıyla yüklendi.")
+    except subprocess.CalledProcessError:
+        error("Paket kurulumu başarısız. İnternet bağlantını ve paket adlarını kontrol et.")
+        sys.exit(1)
 
-    print()
-    success, skipped, failed = install(dotfiles_dir, config_dir, backup=do_backup)
+def clone_repo(tmpdir: str) -> str:
+    header("Repo İndiriliyor")
+    dest = os.path.join(tmpdir, "bspwm_dotfiles")
+    info(f"Klonlanıyor: {REPO_URL}")
+    try:
+        run(f"git clone --depth=1 {REPO_URL} {dest}")
+        ok("Repo başarıyla indirildi.")
+    except subprocess.CalledProcessError:
+        error("git clone başarısız. İnternet bağlantını kontrol et.")
+        sys.exit(1)
+    return os.path.join(dest, DOTFILES_SUBDIR)
 
+def copy_configs(dotfiles_path: str):
+    header("Config Dosyaları Kopyalanıyor")
+    config_home = Path.home() / ".config"
+    config_home.mkdir(parents=True, exist_ok=True)
+
+    for src_name, dst_name in CONFIG_MAP.items():
+        src = Path(dotfiles_path) / src_name
+        dst = config_home / dst_name
+
+        if not src.exists():
+            warn(f"Kaynak bulunamadı, atlandı: {src}")
+            continue
+
+        if dst.exists():
+            backup = Path(str(dst) + ".bak")
+            warn(f"Mevcut '{dst_name}' yedekleniyor → {backup}")
+            if backup.exists():
+                shutil.rmtree(backup) if backup.is_dir() else backup.unlink()
+            shutil.copytree(dst, backup) if dst.is_dir() else shutil.copy2(dst, backup)
+            shutil.rmtree(dst) if dst.is_dir() else dst.unlink()
+
+        shutil.copytree(src, dst)
+        ok(f"~/.config/{dst_name}  ←  {src_name}/")
+
+def fix_permissions():
+    """bspwmrc çalıştırılabilir olmalı."""
+    header("İzinler Ayarlanıyor")
+    bspwmrc = Path.home() / ".config/bspwm/bspwmrc"
+    if bspwmrc.exists():
+        bspwmrc.chmod(0o755)
+        ok("bspwmrc +x yapıldı.")
+    launch_sh = Path.home() / ".config/polybar/launch.sh"
+    if launch_sh.exists():
+        launch_sh.chmod(0o755)
+        ok("polybar/launch.sh +x yapıldı.")
+
+def fish_shell_prompt():
+    header("Fish Shell")
+    fish_path = shutil.which("fish")
+    if not fish_path:
+        warn("fish bulunamadı, atlanıyor.")
+        return
+    current_shell = os.environ.get("SHELL", "")
+    if "fish" in current_shell:
+        ok("Varsayılan shell zaten fish.")
+        return
+    print(f"  Mevcut shell: {current_shell}")
+    answer = input(f"  Fish'i varsayılan shell yapmak ister misin? [{BOLD}e{RESET}/h]: ").strip().lower()
+    if answer in ("e", "evet", "y", "yes", ""):
+        try:
+            run(f"chsh -s {fish_path}")
+            ok(f"Varsayılan shell {fish_path} olarak ayarlandı.")
+            info("Değişikliğin etkili olması için tekrar giriş yapman gerekir.")
+        except subprocess.CalledProcessError:
+            warn("chsh başarısız. Manuel: 'chsh -s $(which fish)'")
+    else:
+        info("Fish shell değişikliği atlandı.")
+
+def print_summary():
+    header("Kurulum Tamamlandı")
+    ok("Tüm paketler yüklendi.")
+    ok("Config dosyaları ~/.config altına kopyalandı.")
     print(f"""
-{BOLD}══════════════════════════════════════{RESET}
-  {GREEN}✔ Başarılı : {success}{RESET}
-  {YELLOW}⚠ Atlanan  : {skipped}{RESET}
-  {RED}✘ Hatalı   : {failed}{RESET}
-{BOLD}══════════════════════════════════════{RESET}
+  {BOLD}Sonraki adımlar:{RESET}
+
+  1. bspwm'i başlatmak için .xinitrc dosyana ekle:
+       {CYAN}exec bspwm{RESET}
+     Ardından: {CYAN}startx{RESET}
+
+  2. Monitor adını güncelle (şu an HDMI-0):
+       {CYAN}~/.config/bspwm/bspwmrc{RESET}   → xrandr satırı
+       {CYAN}~/.config/polybar/config.ini{RESET} → monitor = HDMI-0
+
+  3. Duvar kağıdı yolunu güncelle:
+       {CYAN}~/.config/bspwm/bspwmrc{RESET}
+       → feh --bg-scale ~/Resimler/Wallpaper/1.jpg
+
+  4. ALSA sink numarasını kontrol et:
+       {CYAN}~/.config/polybar/modules.ini{RESET} → sink = 51
+       Kendi sink numarası için: {CYAN}pactl list sinks short{RESET}
+
+  5. NVIDIA kullanıyorsan:
+       {CYAN}nvidia-settings --load-config-only{RESET}
+     satırı bspwmrc'de zaten mevcut.
 """)
 
-    if success > 0:
-        print(f"  {CYAN}Kurulum tamamlandı! bspwm'i yeniden başlatın.{RESET}\n")
+def main():
+    print(f"""
+{BOLD}{CYAN}
+  ██████╗ ███████╗██████╗ ██╗    ██╗███╗   ███╗
+  ██╔══██╗██╔════╝██╔══██╗██║    ██║████╗ ████║
+  ██████╔╝███████╗██████╔╝██║ █╗ ██║██╔████╔██║
+  ██╔══██╗╚════██║██╔═══╝ ██║███╗██║██║╚██╔╝██║
+  ██████╔╝███████║██║     ╚███╔███╔╝██║ ╚═╝ ██║
+  ╚═════╝ ╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝     ╚═╝
+                                    dotfiles installer
+{RESET}""")
 
+    if not is_arch():
+        error("Arch Linux (pacman) gereklidir.")
+        sys.exit(1)
+
+    install_packages()
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        dotfiles_path = clone_repo(tmpdir)
+        copy_configs(dotfiles_path)
+
+    fix_permissions()
+    fish_shell_prompt()
+    print_summary()
 
 if __name__ == "__main__":
     main()

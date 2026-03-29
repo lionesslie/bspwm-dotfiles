@@ -1,0 +1,35 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d 1 2 3 4 5 6 7
+
+bspc config border_width         2
+bspc config window_gap           9
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config focus_follows_pointer true
+bspc config focused_border_color "#7899FA"
+bspc config normal_border_color "#1f222b"
+bspc config border_width 3
+bspc config borderless_monocle true
+
+bspc config active_border_color "#bd93f9"
+bspc config presel_feedback_color "#6272a4"
+
+#AutoStart
+sxhkd &
+picom --config $HOME/.config/picom/picom.conf &
+dunst &
+polybar &
+steam &
+xrandr --output HDMI-0 --mode 1920x1080 --rate 180 &
+xinput --set-prop 12 "libinput Accel Speed" -0.9
+feh --bg-scale Resimler/Wallpaper/1.jpg &
+udiskie -t &
+nvidia-settings --load-config-only &
+udisksctl mount -b /dev/sda1 &
+udisksctl mount -b /dev/sdc1 &

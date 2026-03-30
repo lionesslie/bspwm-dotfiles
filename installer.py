@@ -59,8 +59,6 @@ PACMAN_PACKAGES = [
     "xorg-xinput",
     # Fontlar (polybar config.ini + kitty.conf + rofi config.rasi)
     "ttf-jetbrains-mono-nerd",
-    "ttf-material-design-icons-extended",
-    "unifont",
     # İkon teması (rofi: icon-theme = Papirus-dark)
     "papirus-icon-theme",
     # Medya tuşları

@@ -28,29 +28,19 @@ def header(msg): print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n
 
 # ── Package list ──────────────────────────────────────────────────────────────
 PACMAN_PACKAGES = [
-    # Window manager & hotkeys
     "bspwm", "sxhkd",
-    # Bar, compositor, notifications
     "polybar", "picom", "dunst",
-    # Terminal, launcher, file manager
     "kitty", "rofi", "thunar",
-    # Shell & utilities
     "fish", "feh", "udiskie", "udisks2",
-    # Audio
     "alsa-utils",
-    # Xorg utilities
     "xorg-xrandr", "xorg-xinput", "xorg-setxkbmap", "xorg-xset",
-    # Fonts & icons
     "ttf-jetbrains-mono-nerd", "ttf-material-design-icons-extended",
     "papirus-icon-theme",
-    # Media & system
     "playerctl", "brightnessctl", "networkmanager",
-    # Misc
     "libnotify", "xclip", "flameshot",
-    # Editor
     "neovim",
-    # Build tools (needed for telescope-fzf-native and AUR)
     "base-devel",
+    "steam", "gamemode",
 ]
 
 # ── Repo ──────────────────────────────────────────────────────────────────────

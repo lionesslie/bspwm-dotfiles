@@ -44,12 +44,12 @@
 
 ## Desktop
 
-![Image](Images/image.png)
+![Image](Images/Image.png)
 
 ---
 ## Terminal
 
-![Image](Images/ImageS.png)
+![Image](Images/Image1.png)
 
 ---
 ## Installation

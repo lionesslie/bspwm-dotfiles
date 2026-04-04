@@ -12,7 +12,7 @@
 
 ---
 
-## 📦 Contents
+## Contents
 
 | Folder | Tool | Description |
 |--------|------|-------------|
@@ -28,7 +28,7 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - 5 workspaces with colored icons on polybar
 - Shadow and fade effects via **picom** compositor
@@ -52,7 +52,7 @@
 ![Image](Images/ImageS.png)
 
 ---
-## 🚀 Installation
+## Installation
 
 ### Requirements
 
@@ -77,7 +77,7 @@ python installer.py
 
 ---
 
-## 📋 Installed Packages
+## Installed Packages
 
 ```
 bspwm  sxhkd  polybar  picom  dunst  kitty  rofi
@@ -90,7 +90,7 @@ networkmanager  libnotify  xclip  flameshot  base-devel
 
 ---
 
-## ⚙️ Post-Install
+## Post-Install
 
 ### Starting bspwm
 ```bash
@@ -140,7 +140,7 @@ Turkish Q and Russian ЯВЕРТЫ layouts are included by default. To change th
 
 ---
 
-## ⌨️ Keybindings
+## Keybindings
 
 | Keybinding | Action |
 |------------|--------|
@@ -162,7 +162,7 @@ Turkish Q and Russian ЯВЕРТЫ layouts are included by default. To change th
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 bspwm-dotfiles/

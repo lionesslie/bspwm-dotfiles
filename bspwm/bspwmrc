@@ -4,7 +4,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc monitor -d 1 2 3 4 5
 
-bspc config border_width         3
+bspc config border_width         5
 bspc config window_gap           9
 
 bspc config split_ratio          0.50
@@ -35,6 +35,6 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 180 &
 xinput --set-prop 12 "libinput Accel Speed" -1.0
 feh --bg-scale Resimler/Wallpaper/1.jpg &
 udiskie -t &
-nvidia-settings --load-config-only &
 udisksctl mount -b /dev/sda1 &
 udisksctl mount -b /dev/sdc1 &
+nvidia-settings --load-config-only &

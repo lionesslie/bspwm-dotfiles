@@ -42,11 +42,12 @@
 
 ---
 
-## Image
+## Desktop
 
 ![Image](Images/image.png)
 
 ---
+## Terminal
 
 ![Image](Images/ImageS.png)
 

@@ -29,43 +29,25 @@ def header(msg): print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n
 # ── Paket listesi ─────────────────────────────────────────────────────────────
 # Tüm config dosyaları incelenerek çıkarıldı
 PACMAN_PACKAGES = [
-    # Temel WM + kısayol yöneticisi
     "bspwm",
     "sxhkd",
-    # Compositor
     "picom",
-    # Status bar
     "polybar",
-    # Bildirim yöneticisi (bspwmrc: dunst &)
     "dunst",
-    # Terminal (sxhkd: kitty | kitty.conf)
     "kitty",
-    # Uygulama başlatıcı (sxhkd: rofi -show drun)
     "rofi",
-    # Dosya yöneticisi (sxhkd: thunar)
     "thunar",
-    # Duvar kağıdı (bspwmrc: feh --bg-scale)
     "feh",
-    # Shell (kitty.conf: shell /usr/bin/fish)
     "fish",
-    # Disk bağlama (bspwmrc: udiskie -t)
     "udiskie",
     "udisks2",
-    # Ses (polybar: internal/alsa)
     "alsa-utils",
-    # Ekran çözünürlüğü (bspwmrc: xrandr)
     "xorg-xrandr",
-    # Fare hızı (bspwmrc: xinput --set-prop)
     "xorg-xinput",
-    # Fontlar (polybar config.ini + kitty.conf + rofi config.rasi)
     "ttf-jetbrains-mono-nerd",
-    # İkon teması (rofi: icon-theme = Papirus-dark)
     "papirus-icon-theme",
-    # Medya tuşları
     "playerctl",
-    # Parlaklık (polybar: internal/backlight)
     "brightnessctl",
-    # Ağ (polybar: internal/network)
     "networkmanager",
 ]
 

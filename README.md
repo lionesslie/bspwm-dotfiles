@@ -19,10 +19,10 @@
 | `bspwm/` | [bspwm](https://github.com/baskerville/bspwm) | Pencere yöneticisi |
 | `sxhkd/` | [sxhkd](https://github.com/baskerville/sxhkd) | Kısayol yöneticisi |
 | `polybar/` | [Polybar](https://github.com/polybar/polybar) | Status bar |
-| `picom/` | [Picom](https://github.com/yshui/picom) | Compositor (gölge, fade) |
+| `picom/` | [Picom](https://github.com/yshui/picom) | Compositor |
 | `dunst/` | [Dunst](https://dunst-project.org) | Bildirim yöneticisi |
-| `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal (Cosmic tema) |
-| `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Uygulama başlatıcı (Catppuccin tema) |
+| `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal |
+| `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Uygulama başlatıcı |
 | `fish/` | [Fish](https://fishshell.com) | Shell |
 
 ---

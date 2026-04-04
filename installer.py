@@ -49,6 +49,10 @@ PACMAN_PACKAGES = [
     "playerctl",
     "brightnessctl",
     "networkmanager",
+    "base-devel",
+    "python-lsp-server",
+    "clang",
+    "nvim",
 ]
 
 # ── Repo ──────────────────────────────────────────────────────────────────────

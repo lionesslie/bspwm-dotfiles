@@ -37,7 +37,7 @@ PACMAN_PACKAGES = [
     "ttf-jetbrains-mono-nerd", "ttf-material-design-icons-extended",
     "papirus-icon-theme",
     "playerctl", "brightnessctl", "networkmanager",
-    "libnotify", "xclip", "flameshot",
+    "libnotify", "xclip", "flameshot", "firefox",
     "neovim",
     "base-devel",
     "steam", "gamemode",

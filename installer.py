@@ -29,32 +29,15 @@ def header(msg): print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n
 # ── Paket listesi ─────────────────────────────────────────────────────────────
 # Tüm config dosyaları incelenerek çıkarıldı
 PACMAN_PACKAGES = [
-    "bspwm",
-    "sxhkd",
-    "picom",
-    "polybar",
-    "dunst",
-    "kitty",
-    "rofi",
-    "thunar",
-    "feh",
-    "fish",
-    "udiskie",
-    "udisks2",
-    "alsa-utils",
-    "xorg-xrandr",
-    "xorg-xinput",
-    "ttf-jetbrains-mono-nerd",
-    "papirus-icon-theme",
-    "playerctl",
-    "brightnessctl",
-    "networkmanager",
-    "base-devel",
-    "python-lsp-server",
-    "clang",
-    "nvim",
+    "bspwm", "sxhkd", "picom", "polybar", "dunst",
+    "kitty", "rofi", "thunar", "feh", "fish",
+    "udiskie", "udisks2", "alsa-utils",
+    "xorg-xrandr", "xorg-xinput", "xorg-setxkbmap", "xorg-xset",
+    "ttf-jetbrains-mono-nerd", "ttf-material-design-icons-extended",
+    "papirus-icon-theme", "playerctl", "brightnessctl",
+    "networkmanager", "libnotify", "xclip", "flameshot",
+    "neovim", "base-devel",
 ]
-
 # ── Repo ──────────────────────────────────────────────────────────────────────
 REPO_URL = "https://github.com/lionesslie/bspwm-dotfiles"
 

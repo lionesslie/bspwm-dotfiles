@@ -42,6 +42,8 @@
 
 ---
 
+## Image
+
 ![Image](Images/image.png)
 
 ---

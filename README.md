@@ -48,7 +48,7 @@
 
 ---
 
-![Image](Images/image.png)
+![Image](Images/ImageS.png)
 
 ---
 ## 🚀 Installation

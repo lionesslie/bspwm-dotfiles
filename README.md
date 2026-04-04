@@ -44,7 +44,7 @@
 
 ## Desktop
 
-![Image](Images/Image.png)
+![Image](Images/Image0.png)
 
 ---
 ## Terminal

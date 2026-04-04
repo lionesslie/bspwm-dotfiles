@@ -27,7 +27,6 @@ def error(msg):  print(f"{RED}[✗]{RESET} {msg}")
 def header(msg): print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n{BOLD}{CYAN}{'─'*50}{RESET}")
 
 # ── Paket listesi ─────────────────────────────────────────────────────────────
-# Tüm config dosyaları incelenerek çıkarıldı
 PACMAN_PACKAGES = [
     "bspwm", "sxhkd", "picom", "polybar", "dunst",
     "kitty", "rofi", "thunar", "feh", "fish",

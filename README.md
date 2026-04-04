@@ -24,6 +24,7 @@
 | `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal emulator |
 | `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Application launcher |
 | `fish/` | [Fish](https://fishshell.com) | Shell |
+| `nvim/` | [Neovim](https://neovim.io) | Text editor |
 
 ---
 
@@ -31,12 +32,13 @@
 
 - 7 workspaces with colored icons on polybar
 - Shadow and fade effects via **picom** compositor
-- **Catppuccin**-themed rofi and **Cosmic**-themed kitty
+- **Catppuccin**-themed rofi, kitty and neovim
 - Turkish keyboard + Russian layout support (switch with `Alt+Shift`)
 - Full-featured polybar with clock, temperature, CPU, RAM, volume, network and battery modules
 - Wallpaper support via `feh`
 - Automatic disk mounting via `udiskie`
 - Icon-rich UI with `JetBrainsMono Nerd Font` + `Material Design Icons`
+- Neovim with lazy.nvim, LSP, Telescope, Treesitter
 
 ---
 
@@ -50,8 +52,8 @@
 ### One-liner Install
 
 ```bash
-git clone https://github.com/lionesslie/bspwm_dotfiles
-cd bspwm_dotfiles
+git clone https://github.com/lionesslie/bspwm-dotfiles
+cd bspwm-dotfiles
 python installer.py
 ```
 
@@ -69,10 +71,11 @@ python installer.py
 
 ```
 bspwm  sxhkd  polybar  picom  dunst  kitty  rofi
-thunar  feh  fish  udiskie  udisks2
+thunar  feh  fish  udiskie  udisks2  neovim
 ttf-jetbrains-mono-nerd  ttf-material-design-icons-extended
 papirus-icon-theme  playerctl  brightnessctl
-alsa-utils  xorg-xrandr  xorg-xinput  flameshot
+alsa-utils  xorg-xrandr  xorg-xinput  xorg-setxkbmap  xorg-xset
+networkmanager  libnotify  xclip  flameshot  base-devel
 ```
 
 ---
@@ -117,6 +120,11 @@ pactl list sinks short
 sink = 51   ← this may differ on your system
 ```
 
+### Enable NetworkManager
+```bash
+sudo systemctl enable --now NetworkManager
+```
+
 ### Keyboard layout
 Turkish Q and Russian layouts are included by default. To change them, edit `~/.config/sxhkd/sxhkdrc` or your desktop settings.
 
@@ -147,28 +155,30 @@ Turkish Q and Russian layouts are included by default. To change them, edit `~/.
 ## 📁 File Structure
 
 ```
-bspwm_dotfiles/
-├── bspwm-dotfiles/
-│   ├── bspwm/
-│   │   └── bspwmrc
-│   ├── sxhkd/
-│   │   └── sxhkdrc
-│   ├── polybar/
-│   │   ├── config.ini
-│   │   ├── colors.ini
-│   │   ├── modules.ini
-│   │   └── launch.sh
-│   ├── picom/
-│   │   └── picom.conf
-│   ├── dunst/
-│   │   └── dunstrc
-│   ├── kitty/
-│   │   └── kitty.conf
-│   ├── rofi/
-│   │   ├── config.rasi
-│   │   └── catppuccin.rasi
-│   └── fish/
-│       ├── config.fish
-│       └── fish_variables
+bspwm-dotfiles/
+├── bspwm/
+│   └── bspwmrc
+├── sxhkd/
+│   └── sxhkdrc
+├── polybar/
+│   ├── config.ini
+│   ├── colors.ini
+│   ├── modules.ini
+│   └── launch.sh
+├── picom/
+│   └── picom.conf
+├── dunst/
+│   └── dunstrc
+├── kitty/
+│   └── kitty.conf
+├── rofi/
+│   ├── config.rasi
+│   └── catppuccin.rasi
+├── fish/
+│   ├── config.fish
+│   └── fish_variables
+├── nvim/
+│   └── init.lua
+├── README.md
 └── installer.py
 ```

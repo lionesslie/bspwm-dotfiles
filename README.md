@@ -2,7 +2,7 @@
 
 # 🌿 bspwm-dotfiles
 
-**bspwm** tabanlı minimal ve modern bir Arch Linux masaüstü kurulumu.
+**bspwm**-based minimal and modern Arch Linux desktop setup.
 
 ![bspwm](https://img.shields.io/badge/WM-bspwm-blue?style=for-the-badge&logo=linux)
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux)
@@ -12,42 +12,42 @@
 
 ---
 
-## 📦 İçerik
+## 📦 Contents
 
-| Klasör | Araç | Açıklama |
-|--------|------|----------|
-| `bspwm/` | [bspwm](https://github.com/baskerville/bspwm) | Pencere yöneticisi |
-| `sxhkd/` | [sxhkd](https://github.com/baskerville/sxhkd) | Kısayol yöneticisi |
+| Folder | Tool | Description |
+|--------|------|-------------|
+| `bspwm/` | [bspwm](https://github.com/baskerville/bspwm) | Window manager |
+| `sxhkd/` | [sxhkd](https://github.com/baskerville/sxhkd) | Hotkey daemon |
 | `polybar/` | [Polybar](https://github.com/polybar/polybar) | Status bar |
 | `picom/` | [Picom](https://github.com/yshui/picom) | Compositor |
-| `dunst/` | [Dunst](https://dunst-project.org) | Bildirim yöneticisi |
-| `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal |
-| `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Uygulama başlatıcı |
+| `dunst/` | [Dunst](https://dunst-project.org) | Notification daemon |
+| `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal emulator |
+| `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Application launcher |
 | `fish/` | [Fish](https://fishshell.com) | Shell |
 
 ---
 
-## ✨ Özellikler
+## ✨ Features
 
-- 7 workspace, renkli ikonlarla polybar
-- Gölge ve fade efektleri ile **picom** compositor
-- **Catppuccin** temalı rofi ve **Cosmic** temalı kitty
-- Türkçe klavye + Rusça desteği (`Alt+Shift` ile geçiş)
-- Saat, sıcaklık, CPU, RAM, ses, ağ ve batarya modülleriyle tam polybar
-- `feh` ile duvar kağıdı desteği
-- `udiskie` ile otomatik disk bağlama
-- `JetBrainsMono Nerd Font` + `Material Design Icons` ile ikonlu arayüz
+- 7 workspaces with colored icons on polybar
+- Shadow and fade effects via **picom** compositor
+- **Catppuccin**-themed rofi and **Cosmic**-themed kitty
+- Turkish keyboard + Russian layout support (switch with `Alt+Shift`)
+- Full-featured polybar with clock, temperature, CPU, RAM, volume, network and battery modules
+- Wallpaper support via `feh`
+- Automatic disk mounting via `udiskie`
+- Icon-rich UI with `JetBrainsMono Nerd Font` + `Material Design Icons`
 
 ---
 
-## 🚀 Kurulum
+## 🚀 Installation
 
-### Gereksinimler
+### Requirements
 
 - Arch Linux
-- `git` ve `python`
+- `git` and `python`
 
-### Tek Komutla Kur
+### One-liner Install
 
 ```bash
 git clone https://github.com/lionesslie/bspwm_dotfiles
@@ -55,17 +55,17 @@ cd bspwm_dotfiles
 python installer.py
 ```
 
-`installer.py` otomatik olarak şunları yapar:
+`installer.py` automatically:
 
-1. Gerekli tüm paketleri `pacman` ile yükler
-2. Mevcut configlerini `.bak` uzantısıyla yedekler
-3. Config dosyalarını `~/.config/` altına kopyalar
-4. `bspwmrc` ve `launch.sh` dosyalarına çalıştırma izni verir (`+x`)
-5. Fish'i varsayılan shell yapıp yapmamayı sorar
+1. Installs all required packages via `pacman`
+2. Backs up your existing configs with a `.bak` extension
+3. Copies config files to `~/.config/`
+4. Grants execute permissions (`+x`) to `bspwmrc` and `launch.sh`
+5. Asks whether to set Fish as the default shell
 
 ---
 
-## 📋 Yüklenen Paketler
+## 📋 Installed Packages
 
 ```
 bspwm  sxhkd  polybar  picom  dunst  kitty  rofi
@@ -77,74 +77,74 @@ alsa-utils  xorg-xrandr  xorg-xinput  flameshot
 
 ---
 
-## ⚙️ Kurulum Sonrası
+## ⚙️ Post-Install
 
-### bspwm'i başlatma
+### Starting bspwm
 ```bash
-# ~/.xinitrc dosyasına ekle:
+# Add to ~/.xinitrc:
 exec bspwm
 
-# Ardından:
+# Then run:
 startx
 ```
 
-### Monitor ayarı
-`~/.config/bspwm/bspwmrc` ve `~/.config/polybar/config.ini` dosyalarında monitor adını güncelle:
+### Monitor setup
+Update the monitor name in `~/.config/bspwm/bspwmrc` and `~/.config/polybar/config.ini`:
 ```bash
-# Mevcut monitörleri görmek için:
+# List available monitors:
 xrandr --listmonitors
 
-# bspwmrc'de:
+# In bspwmrc:
 xrandr --output HDMI-0 --mode 1920x1080 --rate 180 &
 
-# polybar/config.ini'de:
+# In polybar/config.ini:
 monitor = HDMI-0
 ```
 
-### Duvar kağıdı
+### Wallpaper
 ```bash
-# ~/.config/bspwm/bspwmrc
-feh --bg-scale ~/Resimler/Wallpaper/1.jpg &
+# In ~/.config/bspwm/bspwmrc:
+feh --bg-scale ~/Pictures/Wallpaper/1.jpg &
 ```
 
-### ALSA ses ayarı
-Polybar `modules.ini` dosyasında sink numarasını kontrol et:
+### ALSA audio
+Check the sink number in the polybar `modules.ini` file:
 ```bash
-# Kendi sink numaranı öğrenmek için:
+# Find your sink number:
 pactl list sinks short
 
-# modules.ini'de:
-sink = 51   ← burası değişebilir
+# In modules.ini:
+sink = 51   ← this may differ on your system
 ```
 
-### Klavye düzeni
-Varsayılan olarak **Türkçe Q** ve **Rusça** yüklü gelir. Değiştirmek için `~/.config/sxhkd/sxhkdrc` ile masaüstü ayarlarından düzenleyebilirsin.
+### Keyboard layout
+Turkish Q and Russian layouts are included by default. To change them, edit `~/.config/sxhkd/sxhkdrc` or your desktop settings.
 
 ---
 
-## ⌨️ Kısayollar
+## ⌨️ Keybindings
 
-| Kısayol | Eylem |
-|---------|-------|
+| Keybinding | Action |
+|------------|--------|
 | `Super + Enter` | Terminal (kitty) |
-| `Super + D` | Uygulama başlatıcı (rofi) |
-| `Super + E` | Dosya yöneticisi (thunar) |
-| `Super + C` | Pencereyi kapat |
-| `Super + M` | Monocle layout geçişi |
-| `Super + T` | Tiled moda al |
-| `Super + S` | Floating moda al |
+| `Super + D` | Application launcher (rofi) |
+| `Super + E` | File manager (thunar) |
+| `Super + C` | Close window |
+| `Super + M` | Toggle monocle layout |
+| `Super + T` | Set tiled mode |
+| `Super + S` | Set floating mode |
 | `Super + F` | Fullscreen |
-| `Super + Alt + Q` | bspwm'den çık |
-| `Super + Alt + R` | bspwm'i yeniden başlat |
-| `Super + 1-9` | Workspace değiştir |
-| `Super + Shift + 1-9` | Pencereyi workspace'e taşı |
-| `Super + H/J/K/L` | Odak değiştir (vim yönleri) |
-| `Super + Shift + H/J/K/L` | Pencereyi taşı |
-| `Super + Alt + H/J/K/L` | Pencereyi genişlet |
+| `Super + Alt + Q` | Quit bspwm |
+| `Super + Alt + R` | Restart bspwm |
+| `Super + 1-9` | Switch workspace |
+| `Super + Shift + 1-9` | Move window to workspace |
+| `Super + H/J/K/L` | Focus window (vim directions) |
+| `Super + Shift + H/J/K/L` | Move window |
+| `Super + Alt + H/J/K/L` | Resize window |
 
 ---
 
-## 📁 Dosya Yapısı
+## 📁 File Structure
 
 ```
 bspwm_dotfiles/

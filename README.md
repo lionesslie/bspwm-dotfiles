@@ -30,7 +30,7 @@
 
 ## ✨ Features
 
-- 7 workspaces with colored icons on polybar
+- 5 workspaces with colored icons on polybar
 - Shadow and fade effects via **picom** compositor
 - **Catppuccin**-themed rofi, kitty and neovim
 - Turkish keyboard + Russian layout support (switch with `Alt+Shift`)
@@ -126,7 +126,7 @@ sudo systemctl enable --now NetworkManager
 ```
 
 ### Keyboard layout
-Turkish Q and Russian layouts are included by default. To change them, edit `~/.config/sxhkd/sxhkdrc` or your desktop settings.
+Turkish Q and Russian ЯВЕРТЫ layouts are included by default. To change them, edit `~/.config/sxhkd/sxhkdrc` or your desktop settings.
 
 ---
 

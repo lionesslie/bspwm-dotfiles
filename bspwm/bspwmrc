@@ -32,9 +32,9 @@ dunst &
 ~/.config/polybar/launch.sh &
 steam &
 xrandr --output HDMI-0 --mode 1920x1080 --rate 180 &
-xinput --set-prop 12 "libinput Accel Speed" -1.0
+nvidia-settings --load-config-only &
+xinput --set-prop 9 "libinput Accel Speed" -0.9 &
 feh --bg-scale Resimler/Wallpaper/1.jpg &
 udiskie -t &
 udisksctl mount -b /dev/sda1 &
 udisksctl mount -b /dev/sdc1 &
-nvidia-settings --load-config-only &

@@ -34,7 +34,7 @@ PACMAN_PACKAGES = [
     "fish", "feh", "udiskie", "udisks2",
     "alsa-utils",
     "xorg-xrandr", "xorg-xinput", "xorg-setxkbmap", "xorg-xset",
-    "ttf-jetbrains-mono-nerd", "ttf-material-design-icons-extended",
+    "ttf-jetbrains-mono-nerd",
     "papirus-icon-theme",
     "playerctl", "brightnessctl", "networkmanager",
     "libnotify", "xclip", "flameshot", "firefox",

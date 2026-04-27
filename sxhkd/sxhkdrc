@@ -22,6 +22,10 @@ super + Escape
 # bspwm hotkeys
 #
 
+#ChengeLang
+#alt + shift
+#    xdotool key --clearmodifiers XF86Switch_VT_1
+
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}

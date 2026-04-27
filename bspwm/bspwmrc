@@ -25,6 +25,9 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
+# Keyboard layouts: TR + RU, Alt+Shift to toggle
+setxkbmap -layout tr,ru -option grp:lalt_lshift_toggle &
+
 #AutoStart
 sxhkd &
 picom --config $HOME/.config/picom/picom.conf &
@@ -38,3 +41,4 @@ feh --bg-scale Resimler/Wallpaper/1.jpg &
 udiskie -t &
 udisksctl mount -b /dev/sda1 &
 udisksctl mount -b /dev/sdc1 &
+

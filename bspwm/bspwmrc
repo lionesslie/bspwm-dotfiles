@@ -26,7 +26,7 @@ bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
 # Keyboard layouts: TR + RU, Alt+Shift to toggle
-setxkbmap -layout tr,ru -option grp:lalt_lshift_toggle &
+setxkbmap -layout tr,ru -variant ,phonetic -option grp:lalt_lshift_toggle &
 
 #AutoStart
 sxhkd &

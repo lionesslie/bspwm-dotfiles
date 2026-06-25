@@ -35,7 +35,7 @@ PACMAN_PACKAGES = [
     "alsa-utils",
     "xorg-xrandr", "xorg-xinput", "xorg-setxkbmap", "xorg-xset",
     "ttf-jetbrains-mono-nerd",
-    "papirus-icon-theme",
+    "papirus-icon-theme", "gtk3", "gtk4",
     "playerctl", "brightnessctl", "networkmanager",
     "libnotify", "xclip", "flameshot", "firefox",
     "neovim",
@@ -57,6 +57,8 @@ CONFIG_MAP = {
     "rofi":     "rofi",
     "fish":     "fish",
     "nvim":     "nvim",
+    "gtk-3.0":  "gtk-3.0",
+    "gtk-4.0":  "gtk-4.0",
 }
 
 # ─────────────────────────────────────────────────────────────────────────────

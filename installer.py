@@ -30,7 +30,7 @@ def header(msg): print(f"\n{BOLD}{CYAN}{'─'*50}{RESET}\n{BOLD}  {msg}{RESET}\n
 PACMAN_PACKAGES = [
     "bspwm", "sxhkd",
     "polybar", "picom", "dunst",
-    "kitty", "rofi", "thunar",
+    "kitty"," "alacritty", "rofi", "thunar",
     "fish", "feh", "udiskie", "udisks2",
     "alsa-utils",
     "xorg-xrandr", "xorg-xinput", "xorg-setxkbmap", "xorg-xset",

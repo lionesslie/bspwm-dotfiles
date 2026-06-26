@@ -21,7 +21,7 @@
 | `polybar/` | [Polybar](https://github.com/polybar/polybar) | Status bar |
 | `picom/` | [Picom](https://github.com/yshui/picom) | Compositor |
 | `dunst/` | [Dunst](https://dunst-project.org) | Notification daemon |
-| `kitty/` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal emulator |
+| `alacritty/` | [Alacritty](https://sw.kovidgoyal.net/kitty/) | Terminal emulator |
 | `rofi/` | [Rofi](https://github.com/davatorium/rofi) | Application launcher |
 | `fish/` | [Fish](https://fishshell.com) | Shell |
 | `nvim/` | [Neovim](https://neovim.io) | Text editor |

@@ -27,6 +27,11 @@ bspc config pointer_action3 resize_corner
 # Keyboard layouts: TR + RU, Alt+Shift to toggle
 setxkbmap -layout tr,ru -variant ,phonetic -option grp:lalt_lshift_toggle &
 
+# Güç yönetimi ve ekran kararmasını engelleme
+xset s off &
+xset s noblank &
+xset -dpms &
+
 #AutoStart
 killall -q sxhkd picom dunst polybar flameshot
 
@@ -43,3 +48,6 @@ feh --bg-scale Resimler/Wallpaper/1.jpg &
 
 pgrep -x udiskie > /dev/null || udiskie -t &
 pgrep -x steam > /dev/null || steam &
+
+udisksctl mount -b /dev/sda1 &
+udisksctl mount -b /dev/sdc1 &

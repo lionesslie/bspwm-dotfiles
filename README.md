@@ -2,7 +2,7 @@
 
 # 🌿 bspwm-dotfiles
 
-**bspwm**-based minimal and modern ArchLinux and NixOS desktop setup.
+**bspwm**-based minimal and modern Arch Linux and NixOS desktop setup.
 
 ![bspwm](https://img.shields.io/badge/WM-bspwm-blue?style=for-the-badge&logo=linux)
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux)

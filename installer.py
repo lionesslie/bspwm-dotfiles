@@ -53,7 +53,7 @@ CONFIG_MAP = {
     "polybar":  "polybar",
     "picom":    "picom",
     "dunst":    "dunst",
-    "kitty":    "kitty",
+    "alacritty": "alacritty",
     "rofi":     "rofi",
     "fish":     "fish",
     "nvim":     "nvim",

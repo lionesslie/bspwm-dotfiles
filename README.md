@@ -167,29 +167,38 @@ Turkish Q and Russian ЯВЕРТЫ layouts are included by default. To change th
 
 ```
 bspwm-dotfiles/
+├── alacritty/
+│   └── alacritty.toml
 ├── bspwm/
-│   └── bspwmrc
-├── sxhkd/
-│   └── sxhkdrc
-├── polybar/
-│   ├── config.ini
-│   ├── colors.ini
-│   ├── modules.ini
-│   └── launch.sh
-├── picom/
-│   └── picom.conf
+│   ├── bspwmrc
+│   └── xsettingsd
 ├── dunst/
 │   └── dunstrc
-├── kitty/
-│   └── kitty.conf
-├── rofi/
-│   ├── config.rasi
-│   └── catppuccin.rasi
 ├── fish/
 │   ├── config.fish
 │   └── fish_variables
+├── gtk-3.0/
+│   └── settings.ini
+├── gtk-4.0/
+│   └── settings.ini
 ├── nvim/
 │   └── init.lua
+├── picom/
+│   ├── picom.conf
+│   └── picom-animations.conf
+├── polybar/
+│   ├── colors.ini
+│   ├── config.ini
+│   ├── launch.sh
+│   ├── modules.ini
+│   └── powermenu.sh
+├── rofi/
+│   ├── catppuccin.rasi
+│   └── config.rasi
+├── sxhkd/
+│   └── sxhkdrc
 ├── README.md
+├── configuration.nix
+├── copy-nix.sh
 └── installer.py
 ```

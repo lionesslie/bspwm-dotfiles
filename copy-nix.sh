@@ -5,7 +5,7 @@ echo "📂 Kullanıcı ayarları ~/.config klasörüne kopyalanıyor..."
 mkdir -p ~/.config
 
 # Belirttiğin tüm klasörleri kopyalar
-cp -r bspwm sxhkd dunst fish gtk-3.0 kitty nvim picom polybar rofi ~/.config/
+cp -r bspwm sxhkd dunst fish gtk-3.0 gtk-4.0 alacritty nvim picom polybar rofi ~/.config/
 
 # bspwmrc için çalıştırma izni ver (Açılışta siyah ekranda kalmamak için şart)
 if [ -f ~/.config/bspwm/bspwmrc ]; then

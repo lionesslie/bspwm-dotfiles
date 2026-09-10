@@ -43,7 +43,7 @@ flameshot &
 
 nvidia-settings --load-config-only &
 xrandr --output HDMI-0 --mode 1920x1080 --rate 180 &
-xinput --set-prop 9 "libinput Accel Speed" -1.0 &
+xinput --set-prop 9 "libinput Accel Speed" -0.5 &
 feh --bg-scale Resimler/Wallpaper/1.jpg &
 
 pgrep -x udiskie > /dev/null || udiskie -t &

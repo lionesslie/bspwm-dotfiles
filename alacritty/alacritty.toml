@@ -1,0 +1,78 @@
+# ==============================================================================
+# Alacritty Configuration
+# ==============================================================================
+
+[window]
+padding = { x = 12, y = 12 }
+dynamic_title = true
+decorations = "full"
+opacity = 0.95
+blur = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+# ==============================================================================
+# Font Configuration
+# ==============================================================================
+[font]
+size = 13.5
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+# Offset ince ayarları (Karakterlerin tam oturması için)
+[font.offset]
+x = 0
+y = 0
+
+# ==============================================================================
+# Color Scheme (Dark & Aesthetic Minimalist)
+# ==============================================================================
+[colors.primary]
+background = "0x1a1b26" # Derin, koyu lacivert/siyah
+foreground = "0xa9b1d6" # Rahatlatıcı beyaz/gri
+
+[colors.normal]
+black   = "0x32344a"
+red     = "0xf7768e"
+green   = "0x9ece6a"
+yellow  = "0xe0af68"
+blue    = "0x7aa2f7"
+magenta = "0xbb9af7"
+cyan    = "0x7dcfff"
+white   = "0x787c99"
+
+[colors.bright]
+black   = "0x444b6a"
+red     = "0xff7a93"
+green   = "0xb9f27c"
+yellow  = "0xff9e64"
+blue    = "0x7da6ff"
+magenta = "0xbb9af7"
+cyan    = "0x0db9d7"
+white   = "0xacb0d0"
+
+# ==============================================================================
+# Cursor Style
+# ==============================================================================
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Beam"
+blinking = "Always"

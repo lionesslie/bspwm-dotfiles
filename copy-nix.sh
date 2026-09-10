@@ -10,6 +10,7 @@ cp -r bspwm sxhkd dunst fish gtk-3.0 gtk-4.0 alacritty nvim picom polybar rofi ~
 # bspwmrc için çalıştırma izni ver (Açılışta siyah ekranda kalmamak için şart)
 if [ -f ~/.config/bspwm/bspwmrc ]; then
     chmod +x ~/.config/bspwm/bspwmrc
+    chmod +x ~/.config/polybar/launch.sh
     echo "✅ bspwmrc dosyasına çalıştırma izni verildi."
 fi
 

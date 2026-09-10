@@ -6,7 +6,7 @@
 
 ![bspwm](https://img.shields.io/badge/WM-bspwm-blue?style=for-the-badge&logo=linux)
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux)
-![NixOS](https://img.shields.io/badge/NixOS-black?&logo=nixos)
+![NixOS](https://img.shields.io/badge/OS-NixOS-5277C3?style=for-the-badge&logo=nixos&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 </div>

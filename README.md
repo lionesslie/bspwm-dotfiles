@@ -91,9 +91,9 @@ The installer will automatically:
 
 | Keybinding | Action |
 |:---|:---|
-| `Super + Enter` | Open terminal (Kitty) |
-| `Super + D` | Application launcher (Rofi) |
-| `Super + E` | File manager (Thunar) |
+| `Super + Enter` | Open terminal |
+| `Super + D` | Application launcher |
+| `Super + E` | File manager |
 | `Super + C` | Close window |
 | `Super + M` | Toggle monocle layout |
 | `Super + T` | Set tiled mode |
@@ -103,7 +103,7 @@ The installer will automatically:
 | `Super + Alt + R` | Restart bspwm |
 | `Super + 1–9` | Switch workspace |
 | `Super + Shift + 1–9` | Move window to workspace |
-| `Super + H/J/K/L` | Focus window (vim directions) |
+| `Super + H/J/K/L` | Focus window |
 | `Super + Shift + H/J/K/L` | Move window |
 | `Super + Alt + H/J/K/L` | Resize window |
 

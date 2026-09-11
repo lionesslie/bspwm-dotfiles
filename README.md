@@ -7,7 +7,7 @@
 ![bspwm](https://img.shields.io/badge/WM-bspwm-89b4fa?style=for-the-badge&logo=linux&logoColor=white)
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![NixOS](https://img.shields.io/badge/OS-NixOS-5277C3?style=for-the-badge&logo=nixos&logoColor=white)
-![Catppuccin](https://img.shields.io/badge/Theme-Catppuccin-f5c2e7?style=for-the-badge&logo=palette&logoColor=white)
+
 
 </div>
 

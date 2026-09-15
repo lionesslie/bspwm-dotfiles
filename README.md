@@ -37,7 +37,6 @@
 
 - 🖥️ **5 workspaces** with colored icons on Polybar
 - 🌫️ Shadow & fade effects powered by the **Picom** compositor
-- 🎨 **Catppuccin** theme across Rofi, Kitty, and Neovim
 - ⌨️ Turkish Q + Russian ЯВЕРТЫ keyboard layouts (toggle with `Alt + Shift`)
 - 📊 Full-featured Polybar — clock, temperature, CPU, RAM, volume, network & battery
 - 🖼️ Wallpaper management via `feh`
